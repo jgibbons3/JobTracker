@@ -1,0 +1,16 @@
+.graphics_page {
+    display: flex;
+    flex-direction: column;
+}
+
+.graphics_row_one {
+    display: flex;
+    flex-direction: row;
+}
+
+.graphics_container {
+    padding: 1em;
+    width: 30vw;
+    background-color: white;
+    margin: 2.5vw;
+}

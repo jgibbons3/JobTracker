@@ -1,0 +1,133 @@
+.cards_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* total interviews */
+.total_interviews_card {
+    display: flex;
+    flex-direction: column;
+    width: 13vw;
+    height: 9vh;
+    margin: 2.5vw;
+    margin-top: 9vh;
+    background-color: #f6f6f6;
+}
+
+.total_interviews_title {
+    display: flex;
+    background-color: #6398DE;
+    width: 6.5vw;
+    height: 8vh;
+    top: 3vh;
+    right: 11vw;
+    padding-top: 2vh;
+    padding-left: 1.5vh;
+    position: absolute;
+    color: white;
+    font-size: bold;
+    z-index: 1;
+}
+
+.total_interviews_info {
+    display: flex;
+    margin-left: 10.3vw;
+    margin-top: 1vh;
+}
+
+
+/* total applications */
+.total_applications_card {
+    display: flex;
+    flex-direction: column;
+    width: 14vw;
+    height: 9vh;
+    margin: 2.5vw;
+    background-color: #f6f6f6;
+}
+
+.total_applications_title {
+    display: flex;
+    background-color: #FB9119;
+    width: 7.5vw;
+    height: 8vh;
+    top: 22vh;
+    right: 10.5vw;
+    padding-top: 2vh;
+    padding-left: 1.5vh;
+    position: absolute;
+    color: white;
+    font-size: bold;
+    z-index: 1;
+}
+
+.total_applications_info {
+    display: flex;
+    margin-left: 11.3vw;
+    margin-top: 1vh;
+}
+
+
+/* upcoming interviews */
+.upcoming_interviews_card {
+    display: flex;
+    flex-direction: column;
+    width: 22vw;
+    height: auto;
+    margin: 2.5vw;
+    background-color: #f6f6f6;
+}
+
+.upcoming_interview_title {
+    display: flex;
+    justify-content: center;
+    background-color: salmon;
+    width: 19vw;
+    height: 5vh;
+    top: 42vh;
+    right: 3vw;
+    padding-top: 2vh;
+    position: absolute;
+    color: white;
+    font-size: bold;
+    z-index: 1;
+}
+
+.upcoming_interview_header {
+    display: flex;
+    flex-direction: row;
+    width: 22vw;
+    position: relative;
+    top: 1vh;
+    padding-top: 5vh;
+    color: salmon;
+    justify-content: center;
+}
+
+.upcoming_interview_header p {
+    padding-right: 2.5vw;
+    padding-right: 2.5vw;
+    border-bottom: 1px solid lightgrey;
+}
+
+.upcoming_interview_info {
+    display: flex;
+    flex-direction: row;
+    width: 22vw;
+    font-size: small;
+    justify-content: center;
+}
+
+.company_name_upcoming_interview {
+    width: 7vw;
+}
+
+.description_upcoming_interview {
+    width: 9vw;
+}
+
+.status_and_date {
+    width: 5.5vw;
+}
+

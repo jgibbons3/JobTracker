@@ -1,0 +1,40 @@
+.job_card_container {
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+    margin: 0.8% 1% 0.8% 1%;
+    padding: 2% 1% 1.5% 1%;
+    height: auto;
+}
+
+.company_name {
+    width: 12vw;
+}
+
+.description {
+    width: 13vw;
+}
+
+.city {
+    width: 8vw;
+}
+
+.status_and_date_card {
+    display: flex;
+    flex-direction: row;
+    width: 13vw;
+}
+
+.status {
+    width: 5.5vw;
+    margin: 0%;
+}
+
+.date {
+    width: 6.5vw;
+    margin: 0%;
+}
+
+.comments { 
+    width: 21.5vw;
+}

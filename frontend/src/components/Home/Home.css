@@ -1,0 +1,38 @@
+.home_container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: auto;
+    min-height: 100vh;
+}
+
+.left_home {
+    width: 75vw;
+    background-color: #f6f6f6;
+}
+
+.links_header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: auto;
+}
+
+.menuOptions {
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    font-size: 1.3em;
+    color: rgb(122, 141, 139);
+}
+
+.user_menu_clicked {
+    color: #6398DE;
+    padding-left: 2.5vw;
+    padding-right: 2.5vw;
+    font-size: 1.3em;
+    border-bottom: 1.5px solid;
+}
+
+.right_home {
+    width: 25vw;
+}

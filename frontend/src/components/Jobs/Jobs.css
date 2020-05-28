@@ -1,0 +1,74 @@
+.search_job {
+    display: flex;
+    width: 40vw;
+    height: 6.2vh;
+    background-color: white;
+    margin: 2%;
+    margin-left: 18vw;
+    border-radius: 25px;
+}
+
+.searchJobInput {
+    background-color: transparent;
+    border: transparent;
+    width: 35vw;
+    height: 3vh;
+    margin-top: 1.4vh;
+    margin-left: 1.5vw;
+    font-size: medium;
+}
+
+.filterOptions {
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+    padding: 1vw;
+    font-size: 0.9em;
+    background-color: rgb(122, 141, 139);
+    color: white;
+    border-radius: 20px;
+}
+
+.user_filter_clicked {
+    background-color: #6398DE;
+    margin-left: 2.5vw;
+    margin-right: 2.5vw;
+    padding: 1vw;
+    font-size: 0.9em;
+    color: white;
+    border-radius: 20px;
+}
+
+.job_card_headers {
+    display: flex;
+    flex-direction: row;
+    background-color: #6398DE;
+    margin: 1%;
+    color: white;
+    font-size: large;
+    width: 70vw;
+    position: relative;
+    top: 3vh;
+    left: 0.5vw;
+    z-index: 1;
+}  
+
+.company_name_header {
+    padding-left: 1vw;
+    width: 11vw;
+}
+
+.description_header {
+    width: 13.5vw;
+}
+
+.city_header {
+    width: 8vw;
+}
+
+.status_header {
+    width: 6vw;
+}
+
+.date_header {
+    width: 7vw;
+}
