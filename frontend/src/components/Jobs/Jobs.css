@@ -18,9 +18,15 @@
     font-size: medium;
 }
 
+.links_sub_menu {
+    display: flex;
+    flex-direction: row;
+    width: 20vw;
+}
+
 .filterOptions {
-    margin-left: 2.5vw;
-    margin-right: 2.5vw;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
     padding: 1vw;
     font-size: 0.9em;
     background-color: rgb(122, 141, 139);
@@ -30,12 +36,27 @@
 
 .user_filter_clicked {
     background-color: #6398DE;
-    margin-left: 2.5vw;
-    margin-right: 2.5vw;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
     padding: 1vw;
     font-size: 0.9em;
     color: white;
     border-radius: 20px;
+}
+
+.new_job_container {
+    margin-left: 34vw;
+}
+
+.new_job_button {
+    background-color: #6398DE;
+    width: 7vw;
+    margin-top: 2vh;
+    padding: 1vw;
+    font-size: 0.9em;
+    color: white;
+    border-radius: 20px;
+    border-color: transparent;
 }
 
 .job_card_headers {

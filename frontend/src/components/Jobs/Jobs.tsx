@@ -40,24 +40,31 @@ const Jobs: React.FC<Props> = ({location}) => {
             </div>
 
             <div className="left_home">
-                <div className="links_header">
-                    <Link to="/jobs/all/" style={{textDecoration: 'none'}}>
-                        <p className={PathName.includes('/all') ? 'user_filter_clicked' : 'filterOptions'}>
-                        All</p>
-                    </Link>
-                    <Link to="/jobs/open/" style={{textDecoration: 'none'}}>
-                        <p className={PathName.includes('/open') ? 'user_filter_clicked' : 'filterOptions'}>
-                        Open</p>
-                    </Link> 
-                    <Link to="/jobs/interview/" style={{textDecoration: 'none'}}>
-                        <p className={PathName.includes('/interview') ? 'user_filter_clicked' : 'filterOptions'}>
-                        Interview</p>
-                    </Link>
-                    <Link to="/jobs/close/" style={{textDecoration: 'none'}}>
-                        <p className={PathName.includes('/close') ? 'user_filter_clicked' : 'filterOptions'}>
-                        Close</p>
-                    </Link>
+                <div className="links_sub_menu">
+                    <div className="links_header">
+                        <Link to="/jobs/all/" style={{textDecoration: 'none'}}>
+                            <p className={PathName.includes('/all') ? 'user_filter_clicked' : 'filterOptions'}>
+                            All</p>
+                        </Link>
+                        <Link to="/jobs/open/" style={{textDecoration: 'none'}}>
+                            <p className={PathName.includes('/open') ? 'user_filter_clicked' : 'filterOptions'}>
+                            Open</p>
+                        </Link> 
+                        <Link to="/jobs/interview/" style={{textDecoration: 'none'}}>
+                            <p className={PathName.includes('/interview') ? 'user_filter_clicked' : 'filterOptions'}>
+                            Interview</p>
+                        </Link>
+                        <Link to="/jobs/close/" style={{textDecoration: 'none'}}>
+                            <p className={PathName.includes('/close') ? 'user_filter_clicked' : 'filterOptions'}>
+                            Close</p>
+                        </Link>
+                    </div>
+                    <div className="new_job_container">
+                        <button className="new_job_button">Add a Job</button>
+                    </div>
                 </div>  
+
+                
 
                 <div className="job_card_headers">
                     <div className="company_name_header"> 
