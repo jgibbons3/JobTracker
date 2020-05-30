@@ -1,4 +1,4 @@
-import { JobAction, Job, DeleteAction, EditJobAction } from "../action/JobAction";
+import { JobAction, Job, DeleteAction, EditJobAction, AddNewJobAction } from "../action/JobAction";
 import { StatusAction, DeleteSingleStatusAction, EditSingleStatusAction, Status } from "../action/StatusAction";
 
 
@@ -11,7 +11,7 @@ const initialState: InitialState = {
 }
 
 const jobsReducer = function (state = initialState, action: JobAction | StatusAction | DeleteAction | DeleteSingleStatusAction | 
-    EditJobAction | EditSingleStatusAction): InitialState {
+    EditJobAction | EditSingleStatusAction | AddNewJobAction): InitialState {
     switch (action.type) {
            
         case "GET_ALL_JOBS":
@@ -89,6 +89,14 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
                 jobs: editStatusCopyJobs
             }
             
+        case "ADD_NEW_JOB":
+            const newJob = (action as AddNewJobAction).payload
+            
+            return {
+                ...state,
+                jobs: [...state.jobs, newJob]
+            }
+
         default:
             return state;
     }

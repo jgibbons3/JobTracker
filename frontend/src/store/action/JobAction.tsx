@@ -26,6 +26,11 @@ export interface EditJobAction {
     job_id: number
 }
 
+export interface AddNewJobAction {
+    type: string
+    payload: Job
+}
+
 export const allJobsAction = () => async (dispatch: Function, getState: Function) => {
 
     const myHeaders = new Headers({
@@ -94,6 +99,30 @@ export const updateSingleJobAction = (updateData: {}, jobId: number) => async (d
         type: "EDIT_JOB",
         payload: updateData,
         job_id: jobId
+    };   
+    
+    dispatch(action);
+}
+
+
+export const addNewJobAction = (newData: {}) => async (dispatch: Function, getState: Function) => {
+
+    const myHeaders = new Headers({
+        "content-type": "application/json",
+    });
+
+    const config = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(newData)
+    };
+
+    const response = await fetch("http://localhost:8000/jobs/", config);
+    const data = await response.json();
+
+    const action: AddNewJobAction = {
+        type: "ADD_NEW_JOB",
+        payload: data
     };   
     
     dispatch(action);

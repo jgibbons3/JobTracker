@@ -1,0 +1,21 @@
+.newJob_title_container {
+    display: flex;
+    justify-content: center;
+}
+
+.create_job_label {
+    font-size: medium;
+}
+
+.add_job_button {
+    margin-top: 4vh;
+    width: 9vw;
+    height: 5vh;
+    font-size: 1em;
+    color: white;
+    background-color: #6398DE;
+    border: transparent;
+    border-radius: 25em;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+}

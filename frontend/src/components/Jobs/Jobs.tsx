@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, MouseEvent } from "react";
 import "./Jobs.css";
 import { Link, Route, Redirect } from "react-router-dom";
 import AllJobs from "./AllJobs/AllJobs";
@@ -7,6 +7,7 @@ import IntervJobs from "./IntervJobs/IntervJobs";
 import CloseJobs from "./CloseJobs/CloseJobs";
 import { connect } from "react-redux";
 import { BsSearch } from "react-icons/bs";
+import CreateJob from "./CreateJob/CreateJob";
 
 
 interface Props {
@@ -19,6 +20,7 @@ interface Props {
 
 const Jobs: React.FC<Props> = ({location}) => {
     const PathName = location.pathname;
+    const [newJobModal, setNewJobModal] = useState(false)
 
     // search post
     const [state, setState] = useState<{search: string}>({
@@ -28,11 +30,16 @@ const Jobs: React.FC<Props> = ({location}) => {
     const handleSearchJob = (e: React.ChangeEvent<HTMLInputElement>) => {
         setState({...state, [e.target.name]: e.target.value})
     };
+   
+    const handleCreateJob = (event: MouseEvent) => {
+        event.preventDefault()
+        setNewJobModal(!newJobModal)
+    }
     
-  
-
     return (
         <div>
+            {newJobModal ? <CreateJob setNewJobModal={setNewJobModal} newJobModal={newJobModal}/> : <></>}
+
             <div className='search_job'>
                 <input type='text' name='search' value={state.search} className='searchJobInput' 
                     onChange={handleSearchJob} placeholder='Search job...'/>
@@ -60,12 +67,11 @@ const Jobs: React.FC<Props> = ({location}) => {
                         </Link>
                     </div>
                     <div className="new_job_container">
-                        <button className="new_job_button">Add a Job</button>
+                        <button onClick={handleCreateJob} style={{cursor: 'pointer'}} className="new_job_button">Add a Job</button>
                     </div>
                 </div>  
 
                 
-
                 <div className="job_card_headers">
                     <div className="company_name_header"> 
                         <p>Company</p>
@@ -89,8 +95,6 @@ const Jobs: React.FC<Props> = ({location}) => {
                     
                     <p id="comments">Comments</p>
                 </div>
-
-
 
                     <Route path='/jobs/all/' component={AllJobs}/>
                     <Route path='/jobs/open/' component={OpenJobs}/>
