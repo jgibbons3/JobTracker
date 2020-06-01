@@ -37,13 +37,14 @@ class RetrieveUpdateDeleteJob(RetrieveUpdateDestroyAPIView):
 
 # History
 # 1)new_status/<int:job_id>/ POST: Create a new status on a job.
-class history_jobId(ListCreateAPIView):
+class createStatus(ListCreateAPIView):
     serializer_class = HistorySerializer
     lookup_url_kwarg = "job_id"
         
     def perform_create(self, serializer):
         job_id = self.kwargs['job_id']
         serializer.save(job_selector=job_id)
+
 
 # 2)history_status/<int:job_id>/ GET: List all status of a job
 class history_job(ListCreateAPIView):

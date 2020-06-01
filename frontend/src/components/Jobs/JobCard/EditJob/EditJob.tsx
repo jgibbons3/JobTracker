@@ -2,9 +2,8 @@ import React, { MouseEvent, useState } from "react";
 import { connect } from "react-redux";
 import "./EditJob.css";
 import { Job, updateSingleJobAction } from "../../../../store/action/JobAction";
-import { Status, updateSingleStatusAction } from "../../../../store/action/StatusAction";
+import { Status, updateSingleStatusAction, addNewStatusAction } from "../../../../store/action/StatusAction";
 import { MdDelete, MdModeEdit } from "react-icons/md";
-import { FcCalendar } from "react-icons/fc";
 import DeleteSingleStatus from "./DeleteSingleStatus/DeleteSingleStatus";
 
 
@@ -29,6 +28,7 @@ interface JobStatusState {
 }
 
 const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}) => {
+    const today = new Date().toISOString().split('T')[0];
     const [deleteSingleStatus, setDeleteSingleStatus] = useState<Status>()
 
     const [editSingleStatus, setEditSingleStatus] = useState<JobStatusState>({
@@ -83,6 +83,21 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
         setEditJob(!editJob)
     }
 
+    // add new status
+    const [addStatus, setAddStatus] = useState<JobStatusState>({
+        application_status: "open",
+        date: today
+    })
+
+    const handleNewStatus = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
+        setAddStatus({...addStatus, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmitNewStatus = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        dispatch(addNewStatusAction(addStatus, job.job_id))
+        setEditJob(!editJob) 
+    }
 
     // close modal window
     const handleCancelEdit = (event: MouseEvent) => {
@@ -96,7 +111,7 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
         event.preventDefault()
         setDeleteSingleStatus(status)
     }
-
+    
     return(
         <div className='modal-wrapper'>
             <div className='modal-background'/>
@@ -138,7 +153,7 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
                     <div className="edit_line"/>
 
                         <div className="input_edit_status">
-                            <h1 className='update_statuses_label'>Edit Statuses</h1>
+                            {job.statuses?.length ? <h1 className='update_statuses_label'>Edit Statuses</h1> : <></>}
                             {job.statuses?.map((status: Status) => {
                                 return <div key={status.id}>
                                     <form className="status_edit_form" onSubmit={(event) => handleChangeSingleStatus(event, status)}>
@@ -149,9 +164,7 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
                                             <option value="rejected">rejected</option>
                                         </select>
                                         
-
-                                        <FcCalendar style={{cursor: 'pointer'}}/>
-                                        <input className='update_data' name="date" type='text' onChange={handleStatusChange} 
+                                        <input className='update_data' name="date" type='date' min={today} onChange={handleStatusChange} 
                                         defaultValue={status.date}/>
                                     
                                         <MdDelete style={{cursor: 'pointer'}} onClick={(event) => handleDeleteSingleStatus(event, status)} size={25}/>
@@ -162,6 +175,26 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
                                 </div>
                                 
                             })}       
+                        </div>
+
+                        <div>
+                            <h1 className='update_statuses_label'>Add new Status</h1>
+
+                            <form className="status_edit_form" onSubmit={handleSubmitNewStatus}>
+                                <select className='update_data' name="application_status" defaultValue={"open"} 
+                                onChange={handleNewStatus}>
+                                    <option value="open">open</option>
+                                    <option value="interview">interview</option>
+                                    <option value="rejected">rejected</option>
+                                </select>
+
+                                <input className='update_data' name="date" defaultValue={today} type='date' min={today} 
+                                onChange={handleNewStatus}/>
+
+                                <button type="submit" className="dit_single_status_button">
+                                    <MdModeEdit style={{cursor: 'pointer'}} size={25}/> 
+                                </button>
+                            </form>
                         </div>
 
                     <div className="edit_buttons">

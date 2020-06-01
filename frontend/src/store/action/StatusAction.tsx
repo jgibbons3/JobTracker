@@ -90,3 +90,28 @@ export const updateSingleStatusAction = (updateData: {}, status: Status) => asyn
     
     dispatch(action);
 }
+
+export const addNewStatusAction = (newStatus: {}, job_id: number) => async (dispatch: Function, getState: Function) => {
+
+    const myHeaders = new Headers({
+        "content-type": "application/json",
+    });
+
+    const config = {
+        method: 'POST',
+        headers: myHeaders,
+        body: JSON.stringify(newStatus)
+    };
+
+    const response = await fetch(`http://localhost:8000/new_status/${job_id}/`, config);
+    console.log("status response", response)
+    // const data = await response.json();
+    // console.log("status data", data)
+    // new_status/<int:job_id>/ POST: Create a new status on a job.
+    // const action: AddNewJobAction = {
+    //     type: "ADD_NEW_JOB",
+    //     payload: data
+    // };   
+    
+    // dispatch(action);
+}

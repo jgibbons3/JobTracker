@@ -2,9 +2,8 @@
     display: flex;
     flex-direction: row;
     background-color: white;
-    margin: 0.8% 1% 0.8% 1%;
-    padding: 2% 1% 1.5% 1%;
-    height: auto;
+    margin: 0.8% 1% 0% 1%;
+    padding: 2% 1% 0% 1%;
 }
 
 .company_name {
@@ -23,6 +22,7 @@
     display: flex;
     flex-direction: row;
     width: 13vw;
+    margin-bottom: 2.5vh;
 }
 
 .status {
