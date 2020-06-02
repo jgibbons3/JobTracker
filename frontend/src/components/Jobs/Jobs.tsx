@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent } from "react";
+import React, { useState, MouseEvent, useEffect } from "react";
 import "./Jobs.css";
 import { Link, Route, Redirect } from "react-router-dom";
 import AllJobs from "./AllJobs/AllJobs";
@@ -6,8 +6,10 @@ import OpenJobs from "./OpenJobs/OpenJobs";
 import IntervJobs from "./IntervJobs/IntervJobs";
 import CloseJobs from "./CloseJobs/CloseJobs";
 import { connect } from "react-redux";
-import { BsSearch } from "react-icons/bs";
 import CreateJob from "./CreateJob/CreateJob";
+import { BehaviorSubject } from "rxjs"
+import { filter, debounceTime, distinctUntilChanged } from "rxjs/operators";
+import { searchAction } from "../../store/action/JobAction";
 
 
 interface Props {
@@ -18,17 +20,33 @@ interface Props {
     }
 }
 
-const Jobs: React.FC<Props> = ({location}) => {
+
+const Jobs: React.FC<Props> = ({location, dispatch}) => {
     const PathName = location.pathname;
     const [newJobModal, setNewJobModal] = useState(false)
 
     // search post
+    const [searchSubject] = useState<BehaviorSubject<string>>(new BehaviorSubject(""))
+    
+    useEffect(() => {
+        searchSubject.pipe(
+            filter(val => val.length >= 0),
+            debounceTime(750),
+            distinctUntilChanged(),
+        ).subscribe((val) => {
+            dispatch(searchAction(val))
+        })
+    }, [dispatch, searchSubject])
+    
+    
     const [state, setState] = useState<{search: string}>({
         search: "",
     });
 
     const handleSearchJob = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setState({...state, [e.target.name]: e.target.value})
+        const newValue = e.target.value
+        setState({...state, [e.target.name]: newValue})
+        searchSubject.next(newValue)
     };
    
     const handleCreateJob = (event: MouseEvent) => {
@@ -41,9 +59,8 @@ const Jobs: React.FC<Props> = ({location}) => {
             {newJobModal ? <CreateJob setNewJobModal={setNewJobModal} newJobModal={newJobModal}/> : <></>}
 
             <div className='search_job'>
-                <input type='text' name='search' value={state.search} className='searchJobInput' 
-                    onChange={handleSearchJob} placeholder='Search job...'/>
-                    <BsSearch style={{"marginTop": '1em', cursor: 'pointer' }}/>
+                <input type='text' name='search' value={state.search} className='searchJobInput' onChange={handleSearchJob} 
+                placeholder='Search job...'/>
             </div>
 
             <div className="left_home">
@@ -107,5 +124,7 @@ const Jobs: React.FC<Props> = ({location}) => {
         </div>
     )
 }
+
+
 
 export default connect()(Jobs);

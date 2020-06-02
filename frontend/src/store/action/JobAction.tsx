@@ -31,6 +31,11 @@ export interface AddNewJobAction {
     payload: Job
 }
 
+export interface SearchJobAction {
+    type: string
+    payload: Job[]
+}
+
 export const allJobsAction = () => async (dispatch: Function, getState: Function) => {
 
     const myHeaders = new Headers({
@@ -126,4 +131,31 @@ export const addNewJobAction = (newData: {}) => async (dispatch: Function, getSt
     };   
     
     dispatch(action);
+}
+
+export const searchAction = (searchValue: string) => async (dispatch: Function, getState: Function) => {
+
+    const myHeaders = new Headers({
+        "content-type": "application/json",
+    });
+
+    const config = {
+        method: 'GET',
+        headers: myHeaders
+    };
+
+    const response = await fetch(`http://localhost:8000/jobs/?search=${searchValue}`, config);
+    const job = await response.json();
+    
+    console.log("data", job)
+    const action: SearchJobAction = {
+        type: "SEARCH_JOB",
+        payload: job
+    };   
+    
+    dispatch(action);
+
+    job.map((item: Job) => {
+        return dispatch(statusAction(item.job_id))
+    })
 }

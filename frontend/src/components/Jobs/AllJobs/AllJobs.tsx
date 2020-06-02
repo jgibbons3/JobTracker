@@ -5,16 +5,16 @@ import { connect } from "react-redux";
 
 
 interface Props {
-    jobs: Job[]
+    searchJobs: Job[]
 }
 
 
-const AllJobs: React.FC<Props> = ({jobs}) => {
+const AllJobs: React.FC<Props> = ({searchJobs}) => {
 
 
     return (
         <div> 
-            {jobs && jobs.map((job, i: number) => {
+            {searchJobs && searchJobs.map((job, i: number) => {
                 return <JobCard key={i} eachJobs={job}/>
             })}
                
@@ -24,7 +24,7 @@ const AllJobs: React.FC<Props> = ({jobs}) => {
 
 const mapStateToProps = (state: any) => {
     return{
-        jobs: state.jobsReducer.jobs
+        searchJobs: state.jobsReducer.searchJobs
     };
 };
 

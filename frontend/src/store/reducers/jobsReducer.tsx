@@ -1,23 +1,26 @@
-import { JobAction, Job, DeleteAction, EditJobAction, AddNewJobAction } from "../action/JobAction";
+import { JobAction, Job, DeleteAction, EditJobAction, AddNewJobAction, SearchJobAction } from "../action/JobAction";
 import { StatusAction, DeleteSingleStatusAction, EditSingleStatusAction, Status } from "../action/StatusAction";
 
 
 export interface InitialState {
     jobs: Job[]
+    searchJobs: Job[]
 }
 
 const initialState: InitialState = {
     jobs: [],
+    searchJobs: []
 }
 
 const jobsReducer = function (state = initialState, action: JobAction | StatusAction | DeleteAction | DeleteSingleStatusAction | 
-    EditJobAction | EditSingleStatusAction | AddNewJobAction): InitialState {
+    EditJobAction | EditSingleStatusAction | AddNewJobAction | SearchJobAction): InitialState {
     switch (action.type) {
            
         case "GET_ALL_JOBS":
             return {
                 ...state,
                 jobs: (action as JobAction).payload,
+                searchJobs: (action as JobAction).payload,
             };
 
         case "GET_JOB_STATUS":
@@ -29,9 +32,13 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
                 const currentJob = state.jobs.find(job => job.job_id === jobId) as Job
                 currentJob.statuses = statuses.payload
                 
+                const currentSearchJob = state.searchJobs.find(job => job.job_id === jobId) as Job
+                currentSearchJob.statuses = statuses.payload
+
                 return {
                     ...state,
                     jobs: [...state.jobs],
+                    searchJobs: [...state.searchJobs]
                 };
             } else {
                 return {
@@ -96,6 +103,13 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
                 ...state,
                 jobs: [...state.jobs, newJob]
             }
+
+        case "SEARCH_JOB":
+        
+            return {
+                ...state,
+                searchJobs: (action as SearchJobAction).payload
+            };
 
         default:
             return state;
