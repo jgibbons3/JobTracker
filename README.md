@@ -10,7 +10,7 @@ Dashboard with a menu where user can select to see jobs or graphics.
 The dashboard has a side bar with interactive cards to inform about the upcoming interviews, and other features.
 
 
-### The app was build with Django for the backend and React for frontend, with Redux, Route, Typescript, test cases and docker.
+### The app was build with Django for the backend and React for frontend, with Redux, Route, Typescript, RxJs, test cases and docker.
 
 
 ## RUN THIS APP WITH:
