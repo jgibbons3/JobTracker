@@ -42,8 +42,9 @@ class createStatus(ListCreateAPIView):
     lookup_url_kwarg = "job_id"
         
     def perform_create(self, serializer):
-        job_id = self.kwargs['job_id']
-        serializer.save(job_selector=job_id)
+        job_id = int(self.kwargs['job_id'])
+        job = Job.objects.get(job_id = job_id)
+        serializer.save(job_selector=job)
 
 
 # 2)history_status/<int:job_id>/ GET: List all status of a job

@@ -6,17 +6,17 @@ import "./AllJobs.css";
 
 
 interface Props {
-    searchJobs: Job[]
+    jobs: Job[]
 }
 
 
-const AllJobs: React.FC<Props> = ({searchJobs}) => {
+const AllJobs: React.FC<Props> = ({jobs}) => {
 
 
     return (
         <div> 
-            {searchJobs.length === 0 ? <p className="job_filter_messages">No jobs in this cathegory</p> : 
-            searchJobs.map((job, i: number) => {
+            {jobs.length === 0 ? <p className="job_filter_messages">No jobs in this cathegory</p> : 
+            jobs.map((job, i: number) => {
                 return <JobCard key={i} eachJobs={job}/>
             })}  
         </div>
@@ -26,7 +26,7 @@ const AllJobs: React.FC<Props> = ({searchJobs}) => {
 
 const mapStateToProps = (state: any) => {
     return{
-        searchJobs: state.jobsReducer.searchJobs
+        jobs: state.jobsReducer.jobs
     };
 };
 

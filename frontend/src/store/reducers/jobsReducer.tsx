@@ -1,26 +1,23 @@
 import { JobAction, Job, DeleteAction, EditJobAction, AddNewJobAction, SearchJobAction } from "../action/JobAction";
-import { StatusAction, DeleteSingleStatusAction, EditSingleStatusAction, Status } from "../action/StatusAction";
+import { StatusAction, DeleteSingleStatusAction, EditSingleStatusAction, Status, AddNewStatusAction } from "../action/StatusAction";
 
 
 export interface InitialState {
     jobs: Job[]
-    searchJobs: Job[]
 }
 
 const initialState: InitialState = {
-    jobs: [],
-    searchJobs: []
+    jobs: []
 }
 
 const jobsReducer = function (state = initialState, action: JobAction | StatusAction | DeleteAction | DeleteSingleStatusAction | 
-    EditJobAction | EditSingleStatusAction | AddNewJobAction | SearchJobAction): InitialState {
+    EditJobAction | EditSingleStatusAction | AddNewJobAction | SearchJobAction | AddNewStatusAction): InitialState {
     switch (action.type) {
            
         case "GET_ALL_JOBS":
             return {
                 ...state,
-                jobs: (action as JobAction).payload,
-                searchJobs: (action as JobAction).payload,
+                jobs: (action as JobAction).payload
             };
 
         case "GET_JOB_STATUS":
@@ -32,13 +29,9 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
                 const currentJob = state.jobs.find(job => job.job_id === jobId) as Job
                 currentJob.statuses = statuses.payload
                 
-                const currentSearchJob = state.searchJobs.find(job => job.job_id === jobId) as Job
-                currentSearchJob.statuses = statuses.payload
-
                 return {
                     ...state,
-                    jobs: [...state.jobs],
-                    searchJobs: [...state.searchJobs]
+                    jobs: [...state.jobs]
                 };
             } else {
                 return {
@@ -108,8 +101,24 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
         
             return {
                 ...state,
-                searchJobs: (action as SearchJobAction).payload
+                jobs: (action as SearchJobAction).payload
             };
+
+        case "ADD_NEW_STATUS_JOB":
+            const addStatusCopyJobs = [...state.jobs]
+            const addStatusAction = action as AddNewStatusAction
+            const findAddJob = addStatusCopyJobs.find(job => job.job_id === addStatusAction.payload.job_selector.job_id) as Job
+            if(findAddJob.statuses){
+                findAddJob.statuses = [...findAddJob.statuses, addStatusAction.payload]
+                return {
+                    ...state,
+                    jobs: [...state.jobs]
+                };
+            } else {
+                return {
+                    ...state
+                }
+            }; 
 
         default:
             return state;

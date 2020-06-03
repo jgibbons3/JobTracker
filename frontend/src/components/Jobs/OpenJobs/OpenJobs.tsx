@@ -5,7 +5,7 @@ import JobCard from "../JobCard/JobCard";
 
 
 interface openJobs {
-    searchJobs: Job[]
+    jobs: Job[]
 }
 
 export function isJobRejected(job: Job): boolean {
@@ -14,14 +14,14 @@ export function isJobRejected(job: Job): boolean {
 }
 
 
-const OpenJobs: React.FC<openJobs> = ({searchJobs}) => {
+const OpenJobs: React.FC<openJobs> = ({jobs}) => {
     
-    const newArray = searchJobs?.filter(job => !isJobRejected(job))
+    const newArray = jobs?.filter(job => !isJobRejected(job))
 
     return (
         <div>
             {newArray.length === 0 ? <p className="job_filter_messages">No jobs in this cathegory</p> : 
-            newArray?.map((job, i: number) => {
+            newArray.map((job, i: number) => {
                 return <JobCard key={i} eachJobs={job}/>
             })}
         </div>
@@ -31,7 +31,7 @@ const OpenJobs: React.FC<openJobs> = ({searchJobs}) => {
 
 const mapStateToProps = (state: any) => {
     return{
-        searchJobs: state.jobsReducer.searchJobs
+        jobs: state.jobsReducer.jobs
     };
 };
 

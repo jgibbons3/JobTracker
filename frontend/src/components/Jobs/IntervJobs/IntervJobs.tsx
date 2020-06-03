@@ -6,7 +6,7 @@ import { isJobRejected } from "../OpenJobs/OpenJobs";
 
 
 export interface interviewJobs {
-    searchJobs: Job[]
+    jobs: Job[]
 }
 
 export function isJobOngoing(job: Job): boolean {
@@ -15,9 +15,9 @@ export function isJobOngoing(job: Job): boolean {
 }
 
 
-const IntervJobs: React.FC<interviewJobs> = ({searchJobs}) => {
+const IntervJobs: React.FC<interviewJobs> = ({jobs}) => {
 
-    const onGoingJobs = searchJobs?.filter(job => isJobOngoing(job))
+    const onGoingJobs = jobs?.filter(job => isJobOngoing(job))
 
     return (
         <div>
@@ -33,7 +33,7 @@ const IntervJobs: React.FC<interviewJobs> = ({searchJobs}) => {
 
 const mapStateToProps = (state: any) => {
     return{
-        searchJobs: state.jobsReducer.searchJobs
+        jobs: state.jobsReducer.jobs
     };
 };
 

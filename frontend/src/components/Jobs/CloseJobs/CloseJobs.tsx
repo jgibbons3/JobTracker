@@ -6,12 +6,12 @@ import { isJobRejected } from "../OpenJobs/OpenJobs";
 
 
 interface closeJobs {
-    searchJobs: Job[]
+    jobs: Job[]
 }
 
-const CloseJobs: React.FC<closeJobs> = ({searchJobs}) => {
+const CloseJobs: React.FC<closeJobs> = ({jobs}) => {
 
-    const newArray = searchJobs?.filter(job => isJobRejected(job))
+    const newArray = jobs?.filter(job => isJobRejected(job))
     
     return (
         <div>
@@ -27,7 +27,7 @@ const CloseJobs: React.FC<closeJobs> = ({searchJobs}) => {
 
 const mapStateToProps = (state: any) => {
     return{
-        searchJobs: state.jobsReducer.searchJobs
+        jobs: state.jobsReducer.jobs
     };
 };
 

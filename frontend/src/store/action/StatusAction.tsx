@@ -23,6 +23,11 @@ export interface EditSingleStatusAction {
     payload: Status
     newStatus : {}
 }
+ export interface AddNewStatusAction {
+    type: string
+    payload: Status
+ }
+
 
 export const statusAction = (job_id: number) => async (dispatch: Function, getState: Function) => {
 
@@ -104,14 +109,12 @@ export const addNewStatusAction = (newStatus: {}, job_id: number) => async (disp
     };
 
     const response = await fetch(`http://localhost:8000/new_status/${job_id}/`, config);
-    console.log("status response", response)
-    // const data = await response.json();
-    // console.log("status data", data)
-    // new_status/<int:job_id>/ POST: Create a new status on a job.
-    // const action: AddNewJobAction = {
-    //     type: "ADD_NEW_JOB",
-    //     payload: data
-    // };   
+    const data = await response.json();
+
+    const action: AddNewStatusAction = {
+        type: "ADD_NEW_STATUS_JOB",
+        payload: data
+    };   
     
-    // dispatch(action);
+    dispatch(action);
 }
