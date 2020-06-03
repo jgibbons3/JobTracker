@@ -147,7 +147,6 @@ export const searchAction = (searchValue: string) => async (dispatch: Function, 
     const response = await fetch(`http://localhost:8000/jobs/?search=${searchValue}`, config);
     const job = await response.json();
     
-    console.log("data", job)
     const action: SearchJobAction = {
         type: "SEARCH_JOB",
         payload: job

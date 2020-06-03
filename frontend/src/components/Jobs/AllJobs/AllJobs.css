@@ -1,0 +1,6 @@
+.job_filter_messages {
+    display: flex;
+    justify-content: center;
+    margin-top: 6vh;
+    font-size: 1em;
+}

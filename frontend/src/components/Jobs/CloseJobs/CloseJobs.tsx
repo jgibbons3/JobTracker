@@ -15,7 +15,7 @@ const CloseJobs: React.FC<closeJobs> = ({searchJobs}) => {
     
     return (
         <div>
-           {newArray.length === 0 ? <p className="job_filter_messages">No jobs with status close yet</p> : 
+           {newArray.length === 0 ? <p className="job_filter_messages">No jobs in this cathegory</p> : 
            newArray.map((job) => {
                 return <JobCard key={job.job_id} eachJobs={job}/>
             })}
