@@ -3,6 +3,7 @@ import "./Graphics.css";
 import { Bar, Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 import { Job } from "../../store/action/JobAction";
+import { isJobInterview } from "../Cards/Cards";
 
 
 interface graphicsJobs {
@@ -97,10 +98,12 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
         }]
     }
 
+    const interviewJobs = jobs?.filter(job => isJobInterview(job))
+    
     return (
         <div className="graphics_page">
+
             {jobs.length === 0 ? <p className="graphics_page_message">Add your job applications to see the graphics</p> : 
-            
             <div className="graphics_row_one">
                 <div className="graphics_container">
                     <Bar
@@ -121,35 +124,8 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
                                     }
                                 }]
                             }}}
-                    />
-                    
+                    /> 
                 </div>
-                
-                <div className="graphics_container">
-                    <Bar
-                        data={barInterviewsPerCity}
-                        options={{
-                            title: {
-                                display: true,
-                                text: "Interviews per city"
-                            },
-                            legend: {
-                                display: false
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true,
-                                        stepSize: 1
-                                    }
-                                }]
-                        }}}
-                    />
-                </div>
-            </div>
-            }
-            {jobs.length === 0 ? <div></div> :
-            <div className="graphics_row_two">
                 <div className="graphics_container">
                     <Line
                         data={lineApplicationsPerDate}
@@ -171,8 +147,34 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
                         }}}
                     />
                 </div>
-            </div>
-            }
+            </div>}
+
+
+            {jobs.length === 0 ? <div></div> :
+            <div className="graphics_row_two">
+                {interviewJobs.length === 0 ? <></> : 
+                <div className="graphics_container">
+                    <Bar
+                        data={barInterviewsPerCity}
+                        options={{
+                            title: {
+                                display: true,
+                                text: "Interviews per city"
+                            },
+                            legend: {
+                                display: false
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true,
+                                        stepSize: 1
+                                    }
+                                }]
+                        }}}
+                    />
+                </div>}
+            </div>}
         </div>
     )
 }
