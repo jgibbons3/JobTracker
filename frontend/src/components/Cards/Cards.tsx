@@ -57,7 +57,8 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
                     <p>Description</p>
                     <p>Date</p>
                 </div>
-                {onGoingJobs?.map((job, i: number) => {
+                {onGoingJobs.length === 0 ? <p className="upcoming_interviews_message">No upcoming interviews</p> 
+                : onGoingJobs?.map((job, i: number) => {
                 return <div className="upcoming_interview_info" key={i}> 
                             <p className="company_name_upcoming_interview">{job.compay_name}</p>
                             <p className="description_upcoming_interview">{job.job_description}</p>

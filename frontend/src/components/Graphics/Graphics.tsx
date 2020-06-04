@@ -99,6 +99,8 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
 
     return (
         <div className="graphics_page">
+            {jobs.length === 0 ? <p className="graphics_page_message">Add your job applications to see the graphics</p> : 
+            
             <div className="graphics_row_one">
                 <div className="graphics_container">
                     <Bar
@@ -120,6 +122,7 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
                                 }]
                             }}}
                     />
+                    
                 </div>
                 
                 <div className="graphics_container">
@@ -144,7 +147,8 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
                     />
                 </div>
             </div>
-
+            }
+            {jobs.length === 0 ? <div></div> :
             <div className="graphics_row_two">
                 <div className="graphics_container">
                     <Line
@@ -168,6 +172,7 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
                     />
                 </div>
             </div>
+            }
         </div>
     )
 }

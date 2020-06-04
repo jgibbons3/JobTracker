@@ -21,7 +21,7 @@ const IntervJobs: React.FC<interviewJobs> = ({jobs}) => {
 
     return (
         <div>
-            {onGoingJobs.length === 0 ? <p className="job_filter_messages">No jobs in this cathegory</p> :
+            {onGoingJobs.length === 0 ? <p className="job_filter_messages">No job applications in this cathegory</p> :
             onGoingJobs?.map((job, i: number) => {
                 return <JobCard key={i} eachJobs={job}/>
             })}    

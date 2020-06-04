@@ -15,7 +15,7 @@ const AllJobs: React.FC<Props> = ({jobs}) => {
 
     return (
         <div> 
-            {jobs.length === 0 ? <p className="job_filter_messages">No jobs in this cathegory</p> : 
+            {jobs.length === 0 ? <p className="job_filter_messages">No job applications in this cathegory</p> : 
             jobs.map((job, i: number) => {
                 return <JobCard key={i} eachJobs={job}/>
             })}  

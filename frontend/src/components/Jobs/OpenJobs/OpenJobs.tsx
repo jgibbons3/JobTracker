@@ -20,7 +20,7 @@ const OpenJobs: React.FC<openJobs> = ({jobs}) => {
 
     return (
         <div>
-            {newArray.length === 0 ? <p className="job_filter_messages">No jobs in this cathegory</p> : 
+            {newArray.length === 0 ? <p className="job_filter_messages">No job applications in this cathegory</p> : 
             newArray.map((job, i: number) => {
                 return <JobCard key={i} eachJobs={job}/>
             })}
