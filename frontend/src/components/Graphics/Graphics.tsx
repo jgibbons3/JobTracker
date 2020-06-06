@@ -39,7 +39,7 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
     function applicationsPerDateArray(job: Job, perDateArray: {[key: string]: number}) {
         job.statuses?.map(status => {
             if(status.application_status === "open") {
-                if(status.date in perDateArray){
+                if(perDateArray[status.date]){
                     perDateArray[status.date] += 1 
                 } else {
                     perDateArray[status.date] = 1 
@@ -58,10 +58,10 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
     }
 
     const lineApplicationsPerDate = {
-        labels: Object.keys(applicationsPerDate(jobs)),
+        labels: Object.keys(applicationsPerDate(jobs)).reverse(),
         datasets: [{
             label: "dates",
-            data: Object.values(applicationsPerDate(jobs)),
+            data: Object.values(applicationsPerDate(jobs)).reverse(),
             borderColor: "salmon", 
             fill: false  
         }]

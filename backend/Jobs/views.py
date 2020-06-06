@@ -20,7 +20,7 @@ class CreateJost(ListCreateAPIView):
 # 3)jobs/?search=<str:search_string> GET: Search job and list result in chronological order
 # http://127.0.0.1:8000/jobs/?search=trabajo  trabajo is the string
 class ListCreateJob(ListCreateAPIView):
-    queryset = Job.objects.all()
+    queryset = Job.objects.all().order_by("-job_id")
     serializer_class = JobSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['compay_name', 'job_description']
