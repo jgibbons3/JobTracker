@@ -8,7 +8,7 @@
 .total_interviews_card {
     display: flex;
     flex-direction: column;
-    width: 13vw;
+    width: 12vw;
     height: 9vh;
     margin: 2.5vw;
     margin-top: 9vh;
@@ -18,9 +18,9 @@
 .total_interviews_title {
     display: flex;
     background-color: #6398DE;
-    width: 6.5vw;
-    height: 8vh;
-    top: 3vh;
+    width: 7.8vw;
+    height: 10vh;
+    top: 1.2vh;
     right: 11vw;
     padding-top: 2vh;
     padding-left: 1.5vh;
@@ -32,7 +32,7 @@
 
 .total_interviews_info {
     display: flex;
-    margin-left: 10.3vw;
+    margin-left: 9.3vw;
     margin-top: 1vh;
 }
 

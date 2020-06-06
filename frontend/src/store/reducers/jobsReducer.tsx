@@ -115,8 +115,10 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
                     jobs: [...state.jobs]
                 };
             } else {
+                findAddJob.statuses = [addStatusAction.payload]
                 return {
-                    ...state
+                    ...state,
+                    jobs: [...state.jobs]
                 }
             }; 
 

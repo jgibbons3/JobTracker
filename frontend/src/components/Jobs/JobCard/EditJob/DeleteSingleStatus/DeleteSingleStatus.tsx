@@ -13,7 +13,6 @@ interface DeleteJob {
                                    
 const DeleteSingleStatus: React.FC<DeleteJob> = ({setDeleteSingleStatus, status, dispatch}) => {
 
-    console.log(status)
   
    const handleDeleteJob = (event: React.MouseEvent<HTMLElement>) => {
         event.preventDefault()

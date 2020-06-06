@@ -30,7 +30,7 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
 
             <div className="total_interviews_card">
                 <div>
-                    <p className="total_interviews_title">Total interviews</p>
+                    <p className="total_interviews_title">Total companies with interviews</p>
                 </div>
                 <div className="total_interviews_info">
                     <p>{interviewJobs.length}</p>
@@ -58,14 +58,14 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
                     <p>Date</p>
                 </div>
                 {onGoingJobs.length === 0 ? <p className="upcoming_interviews_message">No upcoming interviews</p> 
-                : onGoingJobs?.map((job, i: number) => {
-                return <div className="upcoming_interview_info" key={i}> 
+                : onGoingJobs?.map((job) => {
+                return <div className="upcoming_interview_info" key={job.job_id}> 
                             <p className="company_name_upcoming_interview">{job.compay_name}</p>
                             <p className="description_upcoming_interview">{job.job_description}</p>
 
                         {job.statuses?.map(item => {
                             if(item.application_status === "interview") {
-                                return <div className="status_and_date" key={i}> 
+                                return <div className="status_and_date" key={item.id}> 
                                             <p>{item.date}</p>
                                         </div>
                                 }
