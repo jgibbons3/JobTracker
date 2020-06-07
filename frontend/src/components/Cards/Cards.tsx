@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import "./Cards.css";
 import { Job } from "../../store/action/JobAction";
+import { Status } from "../../store/action/StatusAction";
+import moment from "moment";
 
 
 interface cardJobs {
@@ -19,21 +21,31 @@ function futureInterview(job: Job): boolean {
         status.application_status === "interview" && new Date(status.date) >= new Date())
 }
 
+function differenceDate(job: Job) {
+    const copyStatus = job.statuses as Status[]
+    const dateOpenJob = moment(copyStatus[copyStatus.length -1].date)
+    const dateInterviewJob = moment(copyStatus[copyStatus.length -2].date)
+    const diffDate = dateInterviewJob.diff(dateOpenJob, "days")
+    return diffDate
+}
 
 const Cards: React.FC<cardJobs> = ({jobs}) => {
-
     const onGoingJobs = jobs?.filter(job => futureInterview(job))
-    const interviewJobs = jobs?.filter(job => isJobInterview(job))
+    const interviewJobs: Job[] = jobs?.filter(job => isJobInterview(job))
+    
+   // average days to interview
+    const arrayDays = interviewJobs?.map(item => differenceDate(item))
+    const averageInterviewDays = arrayDays.reduce((a: number, b: number) =>  a + b, 0)
 
     return (
         <div className="cards_container">
 
             <div className="total_interviews_card">
                 <div>
-                    <p className="total_interviews_title">Total companies with interviews</p>
+                    <p className="total_interviews_title">Total interviews</p>
                 </div>
                 <div className="total_interviews_info">
-                    <p>{interviewJobs.length}</p>
+                    <p>{interviewJobs.length} - ({Math.round(interviewJobs.length*100/jobs.length)}%)</p>
                 </div>
             </div>
 
@@ -47,6 +59,14 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
                 </div>
             </div>
 
+            <div className="average_days_interview_card">
+                <div>
+                    <p className="average_days_interview_title">Average of days to interview</p>
+                </div>
+                <div className="average_days_interview_info">
+                    {averageInterviewDays? <p>{Math.round(averageInterviewDays/interviewJobs.length)}</p> : <></>}
+                </div>
+            </div>
 
             <div className="upcoming_interviews_card">
                 <div>

@@ -109,7 +109,7 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
             const addStatusAction = action as AddNewStatusAction
             const findAddJob = addStatusCopyJobs.find(job => job.job_id === addStatusAction.payload.job_selector.job_id) as Job
             if(findAddJob.statuses){
-                findAddJob.statuses = [...findAddJob.statuses, addStatusAction.payload]
+                findAddJob.statuses = [addStatusAction.payload, ...findAddJob.statuses]
                 return {
                     ...state,
                     jobs: [...state.jobs]

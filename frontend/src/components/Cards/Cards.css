@@ -8,7 +8,7 @@
 .total_interviews_card {
     display: flex;
     flex-direction: column;
-    width: 12vw;
+    width: 11vw;
     height: 9vh;
     margin: 2.5vw;
     margin-top: 9vh;
@@ -18,10 +18,10 @@
 .total_interviews_title {
     display: flex;
     background-color: #6398DE;
-    width: 7.8vw;
-    height: 10vh;
-    top: 1.2vh;
-    right: 11vw;
+    width: 6.2vw;
+    height: 8vh;
+    top: 3.2vh;
+    right: 12.5vw;
     padding-top: 2vh;
     padding-left: 1.5vh;
     position: absolute;
@@ -32,7 +32,7 @@
 
 .total_interviews_info {
     display: flex;
-    margin-left: 9.3vw;
+    margin-left: 6.2vw;
     margin-top: 1vh;
 }
 
@@ -41,7 +41,7 @@
 .total_applications_card {
     display: flex;
     flex-direction: column;
-    width: 14vw;
+    width: 10vw;
     height: 9vh;
     margin: 2.5vw;
     background-color: #f6f6f6;
@@ -50,10 +50,10 @@
 .total_applications_title {
     display: flex;
     background-color: #FB9119;
-    width: 7.5vw;
+    width: 7vw;
     height: 8vh;
     top: 22vh;
-    right: 10.5vw;
+    right: 11.5vw;
     padding-top: 2vh;
     padding-left: 1.5vh;
     position: absolute;
@@ -64,7 +64,39 @@
 
 .total_applications_info {
     display: flex;
-    margin-left: 11.3vw;
+    margin-left: 7.4vw;
+    margin-top: 1vh;
+}
+
+
+/* average of days to interview */
+.average_days_interview_card {
+    display: flex;
+    flex-direction: column;
+    width: 10vw;
+    height: 9vh;
+    margin: 2.5vw;
+    background-color: #f6f6f6;
+}
+
+.average_days_interview_title {
+    display: flex;
+    background-color: yellowgreen;
+    width: 9vw;
+    height: 8vh;
+    top: 41vh;
+    right: 11.5vw;
+    padding-top: 2vh;
+    padding-left: 1.5vh;
+    position: absolute;
+    color: white;
+    font-size: bold;
+    z-index: 1;
+}
+
+.average_days_interview_info {
+    display: flex;
+    margin-left: 7.4vw;
     margin-top: 1vh;
 }
 
@@ -85,7 +117,7 @@
     background-color: salmon;
     width: 19vw;
     height: 5vh;
-    top: 42vh;
+    top: 61vh;
     right: 3vw;
     padding-top: 2vh;
     position: absolute;
