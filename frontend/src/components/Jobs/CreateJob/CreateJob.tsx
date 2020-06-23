@@ -13,6 +13,7 @@ interface newJobMessage {
 interface newJob {
     compay_name: string
     job_description: string
+    country: string
     city: string
     comments: string
 }
@@ -21,6 +22,7 @@ const CreateJob: React.FC<newJobMessage> = ({setNewJobModal, newJobModal, dispat
     const [newJob, setEditNewJob] = useState<newJob>({
         compay_name: "",
         job_description: "",
+        country: "",
         city: "",
         comments: ""
     })
@@ -59,6 +61,11 @@ const CreateJob: React.FC<newJobMessage> = ({setNewJobModal, newJobModal, dispat
                         <label className='update_label'>Description</label>
                         <input className='update_data' name="job_description" type='text' value={newJob.job_description}
                         onChange={handleChange}/>
+                    </div>
+
+                    <div className="input_edit_profile">
+                        <label className='update_label'>Country</label>
+                        <input className='update_data' name="country" type='text' value={newJob.country} onChange={handleChange}/>
                     </div>
 
                     <div className="input_edit_profile">

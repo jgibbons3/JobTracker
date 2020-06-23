@@ -1,6 +1,6 @@
 import React from "react";
-import { isJobOngoing } from "./IntervJobs";
 import { Job } from "../../../store/action/JobAction";
+import { isJobOngoing } from "../Jobs";
 
 
 it('check function isJobRejected returns the right value', () => {

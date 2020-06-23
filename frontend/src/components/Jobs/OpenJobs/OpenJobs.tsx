@@ -5,23 +5,15 @@ import JobCard from "../JobCard/JobCard";
 
 
 interface openJobs {
-    jobs: Job[]
+    openJobsArray: Job[]
 }
 
-export function isJobRejected(job: Job): boolean {
-    return !!job.statuses?.find(status => 
-        status.application_status === "rejected")
-}
-
-
-const OpenJobs: React.FC<openJobs> = ({jobs}) => {
-    
-    const newArray = jobs?.filter(job => !isJobRejected(job))
+const OpenJobs: React.FC<openJobs> = ({openJobsArray}) => {
 
     return (
         <div>
-            {newArray.length === 0 ? <p className="job_filter_messages">No job applications in this cathegory</p> : 
-            newArray.map((job, i: number) => {
+            {openJobsArray?.length === 0 ? <p className="job_filter_messages">No job applications in this cathegory</p> : 
+            openJobsArray?.map((job, i: number) => {
                 return <JobCard key={i} eachJobs={job}/>
             })}
         </div>
@@ -29,10 +21,4 @@ const OpenJobs: React.FC<openJobs> = ({jobs}) => {
 }
 
 
-const mapStateToProps = (state: any) => {
-    return{
-        jobs: state.jobsReducer.jobs
-    };
-};
-
-export default connect(mapStateToProps)(OpenJobs);
+export default connect()(OpenJobs);

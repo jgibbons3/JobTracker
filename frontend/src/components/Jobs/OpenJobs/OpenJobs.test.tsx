@@ -1,6 +1,6 @@
 import React from "react";
-import { isJobRejected } from "./OpenJobs";
 import { Job } from "../../../store/action/JobAction";
+import { isJobRejected } from "../Jobs";
 
 
 it('check function isJobRejected returns the right value', () => {

@@ -21,31 +21,35 @@
 .links_sub_menu {
     display: flex;
     flex-direction: row;
-    width: 20vw;
+    /* width: 10vw; */
 }
 
 .filterOptions {
-    margin-left: 1.5vw;
-    margin-right: 1.5vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
     padding: 1vw;
     font-size: 0.9em;
     background-color: rgb(122, 141, 139);
     color: white;
     border-radius: 20px;
+    min-width: 3.5vw;
+    max-width: auto;
 }
 
 .user_filter_clicked {
     background-color: #6398DE;
-    margin-left: 1.5vw;
-    margin-right: 1.5vw;
+    margin-left: 1vw;
+    margin-right: 1vw;
     padding: 1vw;
     font-size: 0.9em;
     color: white;
     border-radius: 20px;
+    min-width: 3.5vw;
+    max-width: auto;
 }
 
 .new_job_container {
-    margin-left: 34vw;
+    margin-left: 32vw;
 }
 
 .new_job_button {
@@ -75,15 +79,19 @@
 
 .company_name_header {
     padding-left: 1vw;
-    width: 11vw;
+    width: 10vw;
 }
 
 .description_header {
-    width: 13.5vw;
+    width: 12vw;
+}
+
+.country_header {
+    width: 7vw;
 }
 
 .city_header {
-    width: 8vw;
+    width: 7vw;
 }
 
 .status_header {

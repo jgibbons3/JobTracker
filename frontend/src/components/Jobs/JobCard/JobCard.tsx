@@ -46,6 +46,10 @@ const JobCard: React.FC<jobProps> = ({eachJobs, key, jobs}) => {
                     {eachJobs.job_description}
                 </div>
 
+                <div className="country">
+                    {eachJobs.country} 
+                </div>
+
                 <div className="city">
                     {eachJobs.city} 
                 </div>

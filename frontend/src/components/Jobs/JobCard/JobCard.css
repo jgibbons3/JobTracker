@@ -7,15 +7,19 @@
 }
 
 .company_name {
-    width: 12vw;
+    width: 10.5vw;
 }
 
 .description {
-    width: 13vw;
+    width: 12vw;
+}
+
+.country {
+    width: 7vw;
 }
 
 .city {
-    width: 8vw;
+    width: 7vw;
 }
 
 .status_and_date_card {
@@ -36,5 +40,5 @@
 }
 
 .comments { 
-    width: 21.5vw;
+    width: 17.5vw;
 }

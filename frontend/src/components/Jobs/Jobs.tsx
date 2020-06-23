@@ -9,22 +9,40 @@ import { connect } from "react-redux";
 import CreateJob from "./CreateJob/CreateJob";
 import { BehaviorSubject } from "rxjs"
 import { filter, debounceTime, distinctUntilChanged } from "rxjs/operators";
-import { searchAction } from "../../store/action/JobAction";
+import { searchAction, Job } from "../../store/action/JobAction";
 
 
 interface Props {
-    text?: string;
     dispatch: Function,
     location: {
         pathname: string
-    }
+    },
+    jobs: Job[]
 }
 
+export function isJobRejected(job: Job): boolean {
+    return !!job.statuses?.find(status => 
+        status.application_status === "rejected")
+}
 
-const Jobs: React.FC<Props> = ({location, dispatch}) => {
+export function isJobOngoing(job: Job): boolean {
+    return !isJobRejected(job) && !!job.statuses?.find(status => 
+            status.application_status === "interview")  
+}
+
+const Jobs: React.FC<Props> = ({location, dispatch, jobs}) => {
     const PathName = location.pathname;
     const [newJobModal, setNewJobModal] = useState(false)
 
+    // open jobs value
+    const openJobsArray = jobs?.filter(job => !isJobRejected(job))
+
+    // interview jobs value
+    const intervJobs = jobs?.filter(job => isJobOngoing(job))
+
+    // close jobs value
+    const closedJobs = jobs?.filter(job => isJobRejected(job))
+    
     // search post
     const [searchSubject] = useState<BehaviorSubject<string>>(new BehaviorSubject(""))
     
@@ -68,19 +86,19 @@ const Jobs: React.FC<Props> = ({location, dispatch}) => {
                     <div className="links_header">
                         <Link to="/jobs/all/" style={{textDecoration: 'none'}}>
                             <p className={PathName.includes('/all') ? 'user_filter_clicked' : 'filterOptions'}>
-                            All</p>
+                            All - {jobs?.length}</p>
                         </Link>
                         <Link to="/jobs/open/" style={{textDecoration: 'none'}}>
                             <p className={PathName.includes('/open') ? 'user_filter_clicked' : 'filterOptions'}>
-                            Open</p>
+                            Open - {openJobsArray?.length}</p>
                         </Link> 
                         <Link to="/jobs/interview/" style={{textDecoration: 'none'}}>
                             <p className={PathName.includes('/interview') ? 'user_filter_clicked' : 'filterOptions'}>
-                            Interview</p>
+                            Interview - {intervJobs?.length}</p>
                         </Link>
                         <Link to="/jobs/close/" style={{textDecoration: 'none'}}>
                             <p className={PathName.includes('/close') ? 'user_filter_clicked' : 'filterOptions'}>
-                            Close</p>
+                            Close - {closedJobs?.length}</p>
                         </Link>
                     </div>
                     <div className="new_job_container">
@@ -96,6 +114,10 @@ const Jobs: React.FC<Props> = ({location, dispatch}) => {
                     
                     <div className="description_header">                    
                         <p>Description</p>
+                    </div>
+
+                    <div className="country_header">
+                        <p>Country</p>
                     </div>
 
                     <div className="city_header">
@@ -114,9 +136,15 @@ const Jobs: React.FC<Props> = ({location, dispatch}) => {
                 </div>
 
                     <Route path='/jobs/all/' component={AllJobs}/>
-                    <Route path='/jobs/open/' component={OpenJobs}/>
-                    <Route path='/jobs/interview/' component={IntervJobs}/>
-                    <Route path='/jobs/close/' component={CloseJobs}/>
+                    <Route path='/jobs/open/' render={(props) => (
+                        <OpenJobs {...props} openJobsArray={openJobsArray} />)} 
+                    />
+                    <Route path='/jobs/interview/' render={(props) => (
+                        <IntervJobs {...props} intervJobs={intervJobs} />)} 
+                    />
+                    <Route path='/jobs/close/' render={(props) => (
+                        <CloseJobs {...props} closedJobs={closedJobs} />)} 
+                        />
                     <Redirect from="jobs/" to="/jobs/all"/> 
                 
             </div>
@@ -125,6 +153,10 @@ const Jobs: React.FC<Props> = ({location, dispatch}) => {
     )
 }
 
+const mapStateToProps = (state: any) => {
+    return{
+        jobs: state.jobsReducer.jobs
+    };
+};
 
-
-export default connect()(Jobs);
+export default connect(mapStateToProps)(Jobs);
