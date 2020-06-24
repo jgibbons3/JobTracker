@@ -32,7 +32,8 @@ function differenceDate(job: Job) {
 const Cards: React.FC<cardJobs> = ({jobs}) => {
     const onGoingJobs = jobs?.filter(job => futureInterview(job))
     const interviewJobs: Job[] = jobs?.filter(job => isJobInterview(job))
-    
+
+    console.log("future interv", onGoingJobs)
    // average days to interview
     const arrayDays = interviewJobs?.map(item => differenceDate(item))
     const averageInterviewDays = arrayDays.reduce((a: number, b: number) =>  a + b, 0)
@@ -84,7 +85,7 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
                             <p className="description_upcoming_interview">{job.job_description}</p>
 
                         {job.statuses?.map(item => {
-                            if(item.application_status === "interview") {
+                            if(item.application_status === "interview" && new Date(item.date) >= new Date()) {
                                 return <div className="status_and_date" key={item.id}> 
                                             <p>{item.date}</p>
                                         </div>

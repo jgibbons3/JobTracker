@@ -69,15 +69,13 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
     
     //total interviews per city
     function interviewsPerCity(job: Job, interviewCityArray: {[key: string]: number}) {
-        job.statuses?.map(status => {
-            if(status.application_status === "interview") {
-                if(job.city in interviewCityArray){
-                    interviewCityArray[job.city] += 1 
-                } else {
-                    interviewCityArray[job.city] = 1 
-                }    
-            }    
-        })
+        if(job.statuses?.find(status => status.application_status === "interview")) {
+            if(job.city in interviewCityArray){
+                interviewCityArray[job.city] += 1 
+            } else {
+                interviewCityArray[job.city] = 1 
+            }   
+        }
         return interviewCityArray
     }
 

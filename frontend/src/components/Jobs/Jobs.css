@@ -87,7 +87,15 @@
 }
 
 .country_header {
-    width: 7vw;
+    display: flex;
+    flex-direction: row;
+    width: 8vw;
+}
+
+.select_country {
+    background-color: transparent;
+    border-color: transparent;
+    color: white;
 }
 
 .city_header {

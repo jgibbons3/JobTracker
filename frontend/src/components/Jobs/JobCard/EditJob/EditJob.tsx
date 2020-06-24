@@ -18,6 +18,7 @@ interface DeleteJob {
 interface JobState {
     compay_name: string
     job_description: string
+    country: string
     city: string
     comments: string
 }
@@ -40,6 +41,7 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
     const [editSingleJob, setEditSingleJob] = useState<JobState>({
         compay_name: "",
         job_description: "",
+        country: "",
         city: "",
         comments: ""
     })
@@ -134,6 +136,12 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
                             <label className='update_label'>Description</label>
                             <input className='update_data' name="job_description" type='text' onChange={handleEditSingleJob}
                             defaultValue={job.job_description}/>
+                        </div>
+
+                        <div className="input_edit_profile">
+                            <label className='update_label'>Country</label>
+                            <input className='update_data' name="country" type='text' onChange={handleEditSingleJob} 
+                            defaultValue={job.country}/>
                         </div>
 
                         <div className="input_edit_profile">

@@ -30,6 +30,7 @@ export function isJobOngoing(job: Job): boolean {
             status.application_status === "interview")  
 }
 
+
 const Jobs: React.FC<Props> = ({location, dispatch, jobs}) => {
     const PathName = location.pathname;
     const [newJobModal, setNewJobModal] = useState(false)
