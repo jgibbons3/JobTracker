@@ -94,7 +94,7 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
             
             return {
                 ...state,
-                jobs: [...state.jobs, newJob]
+                jobs: [newJob, ...state.jobs]
             }
 
         case "SEARCH_JOB":

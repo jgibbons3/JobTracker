@@ -23,7 +23,7 @@ interface JobState {
     comments: string
 }
 
-interface JobStatusState {
+export interface JobStatusState {
     application_status: string
     date: string
 }

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: fixed;
 }
 
 /* total interviews */
@@ -84,7 +85,7 @@
     background-color: yellowgreen;
     width: 9vw;
     height: 8vh;
-    top: 41vh;
+    top: 39.5vh;
     right: 11.5vw;
     padding-top: 2vh;
     padding-left: 1.5vh;
@@ -107,7 +108,7 @@
     flex-direction: column;
     width: 22vw;
     height: auto;
-    margin: 2.5vw;
+    margin: 1.5vw;
     background-color: #f6f6f6;
 }
 
@@ -117,7 +118,7 @@
     background-color: salmon;
     width: 19vw;
     height: 5vh;
-    top: 61vh;
+    top: 57vh;
     right: 3vw;
     padding-top: 2vh;
     position: absolute;
@@ -132,7 +133,7 @@
     width: 22vw;
     position: relative;
     top: 1vh;
-    padding-top: 5vh;
+    padding-top: 4vh;
     color: salmon;
     justify-content: center;
 }

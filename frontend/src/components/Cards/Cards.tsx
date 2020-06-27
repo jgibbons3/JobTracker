@@ -4,6 +4,7 @@ import "./Cards.css";
 import { Job } from "../../store/action/JobAction";
 import { Status } from "../../store/action/StatusAction";
 import moment from "moment";
+import { isJobOngoing } from "../Jobs/Jobs";
 
 
 interface cardJobs {
@@ -16,11 +17,6 @@ export function isJobInterview(job: Job): boolean {
         status.application_status === "interview")
 }
 
-function futureInterview(job: Job): boolean {
-    return !!job.statuses?.find(status => 
-        status.application_status === "interview" && new Date(status.date) >= new Date())
-}
-
 function differenceDate(job: Job) {
     const copyStatus = job.statuses as Status[]
     const dateOpenJob = moment(copyStatus[copyStatus.length -1].date)
@@ -30,10 +26,10 @@ function differenceDate(job: Job) {
 }
 
 const Cards: React.FC<cardJobs> = ({jobs}) => {
-    const onGoingJobs = jobs?.filter(job => futureInterview(job))
+    const onGoingJobs = jobs?.filter(job => isJobOngoing(job))
     const interviewJobs: Job[] = jobs?.filter(job => isJobInterview(job))
 
-    console.log("future interv", onGoingJobs)
+
    // average days to interview
     const arrayDays = interviewJobs?.map(item => differenceDate(item))
     const averageInterviewDays = arrayDays.reduce((a: number, b: number) =>  a + b, 0)
@@ -78,7 +74,7 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
                     <p>Description</p>
                     <p>Date</p>
                 </div>
-                {onGoingJobs.length === 0 ? <p className="upcoming_interviews_message">No upcoming interviews</p> 
+                {onGoingJobs?.length === 0 ? <p className="upcoming_interviews_message">No upcoming interviews</p> 
                 : onGoingJobs.reverse().map((job) => {
                 return <div className="upcoming_interview_info" key={job.job_id}> 
                             <p className="company_name_upcoming_interview">{job.compay_name}</p>

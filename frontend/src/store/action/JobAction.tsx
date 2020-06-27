@@ -1,4 +1,5 @@
-import { Status, statusAction } from "./StatusAction";
+import { Status, statusAction, addNewStatusAction } from "./StatusAction";
+import { JobStatusState } from "../../components/Jobs/JobCard/EditJob/EditJob";
 
 export interface Job {
     job_id: number
@@ -130,7 +131,16 @@ export const addNewJobAction = (newData: {}) => async (dispatch: Function, getSt
         payload: data
     };   
     
+    const today = new Date().toISOString().split('T')[0];
+    const firstStatus: JobStatusState = {
+        application_status: "open",
+        date: today
+    }
+
+
     dispatch(action);
+    dispatch(addNewStatusAction(firstStatus, action.payload.job_id))
+    
 }
 
 export const searchAction = (searchValue: string) => async (dispatch: Function, getState: Function) => {

@@ -13,24 +13,24 @@ interface graphicsJobs {
 
 const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
      
-    // jobs per city   
-    function jobsPerCity(jobs:Job[]) {
-        const jobsPerCity: {[key: string]: number}  = {}
+    // jobs per country   
+    function jobsPerCountry(jobs:Job[]) {
+        const jobsPerCountry: {[key: string]: number}  = {}
         jobs?.map(job => {
-            if(job.city in jobsPerCity) {
-                jobsPerCity[job.city] += 1
+            if(job.country in jobsPerCountry) {
+                jobsPerCountry[job.country] += 1
             } else {
-                jobsPerCity[job.city] = 1
+                jobsPerCountry[job.country] = 1
             }
         })
-        return jobsPerCity
+        return jobsPerCountry
     }
 
-    const barJobsPerCity = {
-        labels: Object.keys(jobsPerCity(jobs)),
+    const barJobsPerCountry = {
+        labels: Object.keys(jobsPerCountry(jobs)),
         datasets: [{
-            label: "city",
-            data: Object.values(jobsPerCity(jobs)),
+            label: "country",
+            data: Object.values(jobsPerCountry(jobs)),
             backgroundColor: "orange",  
         }]
     }
@@ -105,11 +105,11 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
             <div className="graphics_row_one">
                 <div className="graphics_container">
                     <Bar
-                        data={barJobsPerCity}
+                        data={barJobsPerCountry}
                         options={{
                             title: {
                                 display: true,
-                                text: "Total applications per city"
+                                text: "Total applications per country"
                             },
                             legend: {
                                 display: false
