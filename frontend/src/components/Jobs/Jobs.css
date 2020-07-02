@@ -109,3 +109,11 @@
 .date_header {
     width: 7vw;
 }
+
+.data_loading {
+    display: flex;
+    justify-content: center;
+    margin-top: 10vh;
+    color: #6398DE;
+    font-size: x-large;
+}

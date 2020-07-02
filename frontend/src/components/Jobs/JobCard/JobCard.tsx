@@ -5,6 +5,7 @@ import { MdDelete, MdModeEdit } from "react-icons/md";
 import { connect } from "react-redux";
 import DeleteJob from "./DeleteJob/DeleteJob";
 import EditJob from "./EditJob/EditJob";
+import rootReducer from "../../../store/reducers";
 
 
 interface jobProps {
@@ -77,7 +78,7 @@ const JobCard: React.FC<jobProps> = ({eachJobs, key, jobs}) => {
 }
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ReturnType<typeof rootReducer>) => {
     return{
         jobs: state.jobsReducer.jobs
     };

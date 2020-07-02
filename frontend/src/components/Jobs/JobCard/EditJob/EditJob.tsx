@@ -5,6 +5,7 @@ import { Job, updateSingleJobAction } from "../../../../store/action/JobAction";
 import { Status, updateSingleStatusAction, addNewStatusAction } from "../../../../store/action/StatusAction";
 import { MdDelete, MdModeEdit } from "react-icons/md";
 import DeleteSingleStatus from "./DeleteSingleStatus/DeleteSingleStatus";
+import rootReducer from "../../../../store/reducers";
 
 
 interface DeleteJob {
@@ -216,7 +217,7 @@ const EditJob: React.FC<DeleteJob> = ({setEditJob, editJob, job, dispatch, jobs}
 };
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ReturnType<typeof rootReducer>) => {
     return{
         jobs: state.jobsReducer.jobs
     };

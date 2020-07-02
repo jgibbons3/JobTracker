@@ -169,3 +169,11 @@
     justify-content: center;
     font-size: 0.8em;
 }
+
+.cards_loader {
+    display: flex;
+    justify-content: center;
+    margin-top: 40vh;
+    color: #6398DE;
+    font-size: x-large;
+}

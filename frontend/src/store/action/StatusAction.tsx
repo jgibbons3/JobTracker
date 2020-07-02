@@ -28,6 +28,10 @@ export interface EditSingleStatusAction {
     payload: Status
  }
 
+ export interface isFetchingAction{
+    type: string
+ }
+
 
 export const statusAction = (job_id: number) => async (dispatch: Function, getState: Function) => {
 
@@ -40,6 +44,12 @@ export const statusAction = (job_id: number) => async (dispatch: Function, getSt
         headers: myHeaders
     };
 
+    // isFetching increasing
+    const actionFetch: isFetchingAction = {
+        type: "STATUS_REQUEST_ONGOING",
+    };
+    dispatch(actionFetch)
+
     const response = await fetch(`http://localhost:8000/history_status/${job_id}/`, config);
     const data: Status[] = await response.json();
    
@@ -47,8 +57,14 @@ export const statusAction = (job_id: number) => async (dispatch: Function, getSt
         type: "GET_JOB_STATUS",
         payload: data
     };
-   
     dispatch(action);
+
+    // isFetching decreasing
+    const actionAfterFetch: isFetchingAction = {
+        type: "IS_STATUS_REQUEST_FINISHED",
+    }
+
+    dispatch(actionAfterFetch)
 };
 
 export const deleteSindleStatusAction = (status: Status) => async (dispatch: Function, getState: Function) => {

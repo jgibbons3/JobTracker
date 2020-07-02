@@ -4,6 +4,7 @@ import { Bar, Line } from "react-chartjs-2";
 import { connect } from "react-redux";
 import { Job } from "../../store/action/JobAction";
 import { isJobInterview } from "../Cards/Cards";
+import rootReducer from "../../store/reducers";
 
 
 interface graphicsJobs {
@@ -177,7 +178,7 @@ const Graphics: React.FC<graphicsJobs> = ({jobs}) => {
     )
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ReturnType<typeof rootReducer>) => {
     return{
         jobs: state.jobsReducer.jobs
     };

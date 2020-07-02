@@ -10,6 +10,7 @@ import CreateJob from "./CreateJob/CreateJob";
 import { BehaviorSubject } from "rxjs"
 import { filter, debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { searchAction, Job } from "../../store/action/JobAction";
+import rootReducer from "../../store/reducers";
 
 
 interface Props {
@@ -17,7 +18,8 @@ interface Props {
     location: {
         pathname: string
     },
-    jobs: Job[]
+    jobs: Job[],
+    isFetching: number
 }
 
 export function isJobRejected(job: Job): boolean {
@@ -31,7 +33,7 @@ export function isJobOngoing(job: Job): boolean {
 }
 
 
-const Jobs: React.FC<Props> = ({location, dispatch, jobs}) => {
+const Jobs: React.FC<Props> = ({location, dispatch, jobs, isFetching}) => {
     const PathName = location.pathname;
     const [newJobModal, setNewJobModal] = useState(false)
 
@@ -82,6 +84,7 @@ const Jobs: React.FC<Props> = ({location, dispatch, jobs}) => {
                 placeholder='Search job...'/>
             </div>
 
+            {isFetching === 0 ?
             <div className="left_home">
                 <div className="links_sub_menu">
                     <div className="links_header">
@@ -149,14 +152,16 @@ const Jobs: React.FC<Props> = ({location, dispatch, jobs}) => {
                     <Redirect from="jobs/" to="/jobs/all"/> 
                 
             </div>
+            : <p className="data_loading">Data will display shortly</p>}
             
         </div>
     )
 }
 
-const mapStateToProps = (state: any) => {
-    return{
-        jobs: state.jobsReducer.jobs
+const mapStateToProps = (state: ReturnType<typeof rootReducer>) => {
+    return {
+        jobs: state.jobsReducer.jobs,
+        isFetching: state.jobsReducer.isFetching
     };
 };
 

@@ -3,6 +3,7 @@ import JobCard from "../JobCard/JobCard";
 import { Job } from "../../../store/action/JobAction";
 import { connect } from "react-redux";
 import "./AllJobs.css";
+import rootReducer from "../../../store/reducers";
 
 
 interface Props {
@@ -24,7 +25,7 @@ const AllJobs: React.FC<Props> = ({jobs}) => {
     )
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ReturnType<typeof rootReducer>) => {
     return{
         jobs: state.jobsReducer.jobs
     };

@@ -1,16 +1,18 @@
 import { JobAction, Job, DeleteAction, EditJobAction, AddNewJobAction, SearchJobAction } from "../action/JobAction";
-import { StatusAction, DeleteSingleStatusAction, EditSingleStatusAction, Status, AddNewStatusAction } from "../action/StatusAction";
+import { StatusAction, DeleteSingleStatusAction, EditSingleStatusAction, Status, AddNewStatusAction, isFetchingAction } from "../action/StatusAction";
 
 
 export interface InitialState {
-    jobs: Job[]
+    jobs: Job[],
+    isFetching: number
 }
 
 const initialState: InitialState = {
-    jobs: []
+    jobs: [],
+    isFetching: 0
 }
 
-const jobsReducer = function (state = initialState, action: JobAction | StatusAction | DeleteAction | DeleteSingleStatusAction | 
+const jobsReducer = function (state = initialState, action: JobAction | isFetchingAction | StatusAction | DeleteAction | DeleteSingleStatusAction | 
     EditJobAction | EditSingleStatusAction | AddNewJobAction | SearchJobAction | AddNewStatusAction): InitialState {
     switch (action.type) {
            
@@ -19,6 +21,12 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
                 ...state,
                 jobs: (action as JobAction).payload
             };
+
+        case "STATUS_REQUEST_ONGOING":
+            return {
+                ...state,
+                isFetching: state.isFetching + 1
+            }
 
         case "GET_JOB_STATUS":
             const statuses = action as StatusAction
@@ -39,6 +47,11 @@ const jobsReducer = function (state = initialState, action: JobAction | StatusAc
                 }
             }; 
 
+        case "IS_STATUS_REQUEST_FINISHED":
+            return {
+                ...state,
+                isFetching: state.isFetching - 1
+            }
 
         case "DELETE_JOB":
             const copyJobs = [...state.jobs]

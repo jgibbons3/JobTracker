@@ -4,11 +4,12 @@ import "./Cards.css";
 import { Job } from "../../store/action/JobAction";
 import { Status } from "../../store/action/StatusAction";
 import moment from "moment";
-import { isJobOngoing } from "../Jobs/Jobs";
+import rootReducer from "../../store/reducers";
 
 
 interface cardJobs {
-    jobs: Job[]
+    jobs: Job[],
+    isFetching: number
 }
 
 
@@ -25,8 +26,13 @@ function differenceDate(job: Job) {
     return diffDate
 }
 
-const Cards: React.FC<cardJobs> = ({jobs}) => {
-    const onGoingJobs = jobs?.filter(job => isJobOngoing(job))
+function futureInterview(job: Job): boolean {
+    return !!job.statuses?.find(item => 
+        item.application_status === "interview" && new Date(item.date).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)) 
+}
+
+const Cards: React.FC<cardJobs> = ({jobs, isFetching}) => {
+    const onGoingJobs = jobs?.filter(job => futureInterview(job))
     const interviewJobs: Job[] = jobs?.filter(job => isJobInterview(job))
 
 
@@ -35,8 +41,9 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
     const averageInterviewDays = arrayDays.reduce((a: number, b: number) =>  a + b, 0)
 
     return (
+        <>
+        {isFetching === 0 ?
         <div className="cards_container">
-
             <div className="total_interviews_card">
                 <div>
                     <p className="total_interviews_title">Total interviews</p>
@@ -81,7 +88,7 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
                             <p className="description_upcoming_interview">{job.job_description}</p>
 
                         {job.statuses?.map(item => {
-                            if(item.application_status === "interview" && new Date(item.date) >= new Date()) {
+                            if(item.application_status === "interview" && new Date(item.date).setHours(0,0,0,0) >= new Date().setHours(0,0,0,0)) {
                                 return <div className="status_and_date" key={item.id}> 
                                             <p>{item.date}</p>
                                         </div>
@@ -91,15 +98,17 @@ const Cards: React.FC<cardJobs> = ({jobs}) => {
                     </div>
                 })}
             </div>
-
         </div>
+        : <p className="cards_loader">Cards will display shortly</p>}
+        </>
     )
 }
 
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ReturnType<typeof rootReducer>) => {
     return{
-        jobs: state.jobsReducer.jobs
+        jobs: state.jobsReducer.jobs,
+        isFetching: state.jobsReducer.isFetching
     };
 };
 
